@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AvitoTestApp</string>
+    <string name="network_warning">Интернет мне запилил</string>
+    <string name="load_error">Что-то пошло не так</string>
+    <string name="reload">Обновить</string>
+    <string name="exit">Выход</string>
+</resources>
