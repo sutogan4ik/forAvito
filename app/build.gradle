@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "ru.brucha.avitotestapp"
+        applicationId "ru.brucha.avitotestapp_bicycle"
         minSdkVersion 8
         targetSdkVersion 19
         versionCode 1
@@ -24,6 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.2.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    compile 'com.google.code.gson:gson:2.3'
 }

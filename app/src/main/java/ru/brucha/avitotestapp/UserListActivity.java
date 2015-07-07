@@ -9,13 +9,11 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import ru.brucha.avitotestapp.adapters.DividerItemDecorator;
 import ru.brucha.avitotestapp.adapters.UserLIstAdapter;
 import ru.brucha.avitotestapp.models.User;
-import ru.brucha.avitotestapp.retrofit.API;
+import ru.brucha.avitotestapp.server.Loader;
+import ru.brucha.avitotestapp.server.interfaces.GetJsonModelListener;
 
 /**
  * Created by Prog on 06.07.2015.
@@ -49,28 +47,21 @@ public class UserListActivity extends Activity {
     }
 
     private void loadUsers(){
-        API.getMethods().getUsers(new Callback<List<User>>() {
+        Loader.getInstance().getJson("https://api.github.com/users", new GetJsonModelListener<List<User>>() {
             @Override
-            public void success(List<User> userList, Response response) {
-                if (userList != null && userList.size() != 0) {
-                    adapter.addAll(userList);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
+            public void loadComplete(List<User> result, String url) {
+                adapter.addAll(result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showAlertDialog(R.string.load_error);
+                        adapter.notifyDataSetChanged();
                     }
                 });
+            }
+
+            @Override
+            public void loadError(Exception error) {
+                error.printStackTrace();
             }
         });
     }
